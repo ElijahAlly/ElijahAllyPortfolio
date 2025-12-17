@@ -4,7 +4,7 @@
 
 ### Looking for more? 
 
-Check out some of my active projects (Not garunteed to be finished or working)
+Check out some of my older projects (Not garunteed to be finished or working)
 
 [https://github.com/ElijahAlly/info-dig](https://github.com/ElijahAlly/info-dig)
   - Be your own source of truth. Search for information which can be fact, in question, or fiction. Determined by the people, backed with context
