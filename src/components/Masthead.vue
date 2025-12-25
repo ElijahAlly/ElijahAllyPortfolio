@@ -3,7 +3,7 @@
 <template>
   <header
     id="page-top"
-    class="relative h-screen flex items-center justify-center bg-[url('@/assets/img/backgrounds/simple-code-icon.png')] bg-position-[center_top_51%] md:bg-position-[center_top_78%]"
+    class="relative h-screen flex items-center justify-center bg-[url('@/assets/img/backgrounds/simple-code-icon.png')] bg-position-[center_top_96%] md:bg-position-[center_top_78%]"
   >
     <div
       class="absolute inset-0 bg-linear-to-t from-black to-transparent opacity-70"
