@@ -26,7 +26,7 @@ const differentiators = [
       <div class="grid lg:grid-cols-[1.15fr_1fr] gap-x-16 gap-y-12">
         <div class="reveal">
           <p class="display-sm text-[clamp(1.6rem,3.4vw,2.5rem)] max-w-[22ch]">
-            Cenova Spark — Igniting Innovation in Government Technology
+            Cenova Spark - Igniting Innovation in Government Technology
           </p>
           <p class="mt-7 text-ink-2 leading-relaxed max-w-[52ch]">
             I founded the company in November 2025 and registered it on SAM.gov
