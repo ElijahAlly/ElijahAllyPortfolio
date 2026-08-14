@@ -1,10 +1,274 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
-  background-color: black;
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ------------------------------------------------------------------
+   Palette
+   Cool paper / blue-black ink, with a single ember accent taken from
+   the "Spark" in Cenova Spark. A second colour, "verify", is reserved
+   strictly for live status — active registrations, shipped products.
+   ------------------------------------------------------------------ */
+:root {
+  --ground: #e7e9ec;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --ink: #10151b;
+  --ink-2: #56606d;
+  --ink-3: #8a95a2;
+  --rule: #ccd3db;
+  --rule-2: #dee3e9;
+  --accent: #c4441a;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(196, 68, 26, 0.09);
+  --verify: #0c7a68;
+  --verify-soft: rgba(12, 122, 104, 0.1);
+  --shadow: 0 1px 2px rgba(16, 21, 27, 0.05), 0 12px 32px -16px rgba(16, 21, 27, 0.22);
 }
 
-html, body, #app, div {
-  overflow-x: hidden;
+:root[data-theme="dark"] {
+  --ground: #0d1116;
+  --surface: #141a20;
+  --surface-2: #1a2129;
+  --ink: #e9ecef;
+  --ink-2: #98a3b0;
+  --ink-3: #6b7784;
+  --rule: #242d36;
+  --rule-2: #1c242c;
+  --accent: #ff7a3d;
+  --accent-ink: #1a0d05;
+  --accent-soft: rgba(255, 122, 61, 0.12);
+  --verify: #2dd4bf;
+  --verify-soft: rgba(45, 212, 191, 0.12);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-2: var(--rule-2);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-verify: var(--verify);
+  --color-verify-soft: var(--verify-soft);
+
+  --font-display: "Archivo", "Helvetica Neue", sans-serif;
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  background-color: var(--ground);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#app {
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------
+   Type roles
+   Archivo carries the display voice, set wide and tight. Public Sans —
+   the typeface of the U.S. Web Design System — carries body copy.
+   IBM Plex Mono is reserved for identifiers, dates and labels: the
+   things that appear as data on a real capability statement.
+   ------------------------------------------------------------------ */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 112;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.display-sm {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 108;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.datum {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------------
+   Section shell
+   ------------------------------------------------------------------ */
+.shell {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 3rem;
+  }
+}
+
+.section {
+  padding-block: 5.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 7.5rem;
+  }
+}
+
+/* A mono label, a hairline that runs to the edge of the measure. */
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.sec-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.spark {
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  background: var(--accent);
+}
+
+/* ------------------------------------------------------------------
+   Links
+   ------------------------------------------------------------------ */
+.link {
+  color: var(--ink);
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.25s ease, color 0.25s ease;
+  padding-bottom: 1px;
+}
+
+.link:hover {
+  color: var(--accent);
+  background-size: 100% 2px;
+}
+
+/* ------------------------------------------------------------------
+   Page-load sequence — one orchestrated moment, then the page is still.
+   ------------------------------------------------------------------ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.9rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wipe {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rise {
+  animation: rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.wipe {
+  transform-origin: left;
+  animation: wipe 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scroll reveal, driven by an IntersectionObserver in useReveal.ts */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

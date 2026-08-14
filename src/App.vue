@@ -1,17 +1,30 @@
 <script setup lang="ts">
-import Navbar from "./components/Navbar.vue";
-import Masthead from "./components/Masthead.vue";
-import About from "./components/About.vue";
-import Projects from "./components/Projects.vue";
-import Contact from "./components/Contact.vue";
-import MyFooter from "./components/Footer.vue";
+import SiteNav from "./components/SiteNav.vue";
+import HeroStatement from "./components/HeroStatement.vue";
+import CompanySection from "./components/CompanySection.vue";
+import ProductsSection from "./components/ProductsSection.vue";
+import CapabilitiesSection from "./components/CapabilitiesSection.vue";
+import PastPerformance from "./components/PastPerformance.vue";
+import SelectedWork from "./components/SelectedWork.vue";
+import OffHours from "./components/OffHours.vue";
+import ContactSection from "./components/ContactSection.vue";
+import SiteFooter from "./components/SiteFooter.vue";
+import { useReveal } from "./composables/useReveal";
+
+useReveal();
 </script>
 
 <template>
-  <Navbar />
-  <Masthead />
-  <About />
-  <Projects />
-  <Contact />
-  <MyFooter />
+  <SiteNav />
+  <main id="main">
+    <HeroStatement />
+    <CompanySection />
+    <ProductsSection />
+    <CapabilitiesSection />
+    <PastPerformance />
+    <SelectedWork />
+    <OffHours />
+    <ContactSection />
+  </main>
+  <SiteFooter />
 </template>
